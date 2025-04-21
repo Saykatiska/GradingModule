@@ -1,0 +1,49 @@
+/* Basic TableView styling */
+.table-view {
+    -fx-background-color: #f4f4f4;
+    -fx-table-cell-border-color: transparent;
+    -fx-table-header-border-color: transparent;
+    -fx-padding: 5;
+}
+
+/* Table header (column headers) */
+.table-view .column-header-background {
+    -fx-background-color: linear-gradient(to bottom, #1dbbdd44, #93f9b944);
+}
+
+.table-view .column-header {
+    -fx-background-color: transparent;
+    -fx-text-fill: #333;
+    -fx-font-weight: bold;
+    -fx-border-width: 0 0 1 0;
+    -fx-border-color: #ddd;
+}
+
+/* Table rows */
+.table-row-cell {
+    -fx-background-color: white;
+    -fx-border-width: 0 0 1 0;
+    -fx-border-color: #eee;
+}
+
+/* Alternate row coloring */
+.table-row-cell:odd {
+    -fx-background-color: #f9f9f9;
+}
+
+/* Selected row */
+.table-row-cell:selected {
+    -fx-background-color: #0096c9;
+    -fx-text-fill: white;
+}
+
+/* Hover effect */
+.table-row-cell:hover {
+    -fx-background-color: #e3f2fd;
+}
+
+/* Table cells */
+.table-cell {
+    -fx-padding: 5 10 5 10;
+    -fx-alignment: CENTER_LEFT;
+}
