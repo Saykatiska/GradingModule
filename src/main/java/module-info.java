@@ -5,6 +5,6 @@ module com.example.gradingmodule {
     requires com.dlsc.formsfx;
     requires java.sql;
 
-    opens com.example.gradingmodule to javafx.fxml;
-    exports com.example.gradingmodule;
+    opens com.example.Test to javafx.fxml;
+    exports com.example.Test;
 }

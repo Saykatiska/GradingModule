@@ -1,4 +1,4 @@
-package com.example.gradingmodule;
+package com.example.GradingModule;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;

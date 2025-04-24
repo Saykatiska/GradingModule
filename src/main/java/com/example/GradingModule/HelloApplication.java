@@ -1,4 +1,4 @@
-package com.example.gradingmodule;
+package com.example.GradingModule;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
