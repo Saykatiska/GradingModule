@@ -16,10 +16,15 @@ public class MyJDBC {
             ResultSet resultSet = statement.executeQuery("SELECT * FROM grades");
 
             while(resultSet.next()){
-                resultSet.getString("studid");
-                resultSet.getString("subjcode");
-                resultSet.getString("fingrade");
-                resultSet.getString("gradestat");
+                String studentId = resultSet.getString("studid");
+                String subjectCode = resultSet.getString("subjcode");
+                String finalGrade = resultSet.getString("fingrade");
+                String gradeStatus = resultSet.getString("gradestat");
+
+                System.out.println("Student ID: " + studentId);
+                System.out.println("Subject Code: " + subjectCode);
+                System.out.println("Final Grade: " + finalGrade);
+                System.out.println("Grade Status: " + gradeStatus);
             }
         }catch (SQLException e) {
             e.printStackTrace();
