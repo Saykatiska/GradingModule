@@ -1,49 +1,66 @@
-/* Basic TableView styling */
-.table-view {
-    -fx-background-color: #f4f4f4;
-    -fx-table-cell-border-color: transparent;
-    -fx-table-header-border-color: transparent;
-    -fx-padding: 5;
+.root {
+    -fx-font-family: "Inter";
 }
 
-/* Table header (column headers) */
+.label {
+    -fx-font-family: 'Inter';
+}
+
+.rounded-border-pane {
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+}
+
+/* Apply to all text elements in TableView */
+.table-view {
+    -fx-font-family: 'Inter';
+    -fx-font-size: 12px;
+    -fx-background-color: transparent;
+    -fx-table-cell-border-color: rgba(0, 0, 0, 0.25);
+    -fx-table-header-border-color: rgba(0, 0, 0, 0.25);
+}
+
+/* Column headers */
 .table-view .column-header-background {
-    -fx-background-color: linear-gradient(to bottom, #1dbbdd44, #93f9b944);
+    -fx-background-color: transparent;
+    -fx-padding: 16;
 }
 
 .table-view .column-header {
     -fx-background-color: transparent;
-    -fx-text-fill: #333;
-    -fx-font-weight: bold;
     -fx-border-width: 0 0 1 0;
-    -fx-border-color: #ddd;
+    -fx-border-color: rgba(0, 0, 0, 0.25);
+    -fx-padding: 16;
+    -fx-font-size: 12px; /* Ensures header text is 12px */
 }
 
-/* Table rows */
-.table-row-cell {
-    -fx-background-color: white;
-    -fx-border-width: 0 0 1 0;
-    -fx-border-color: #eee;
-}
-
-/* Alternate row coloring */
-.table-row-cell:odd {
-    -fx-background-color: #f9f9f9;
-}
-
-/* Selected row */
-.table-row-cell:selected {
-    -fx-background-color: #0096c9;
-    -fx-text-fill: white;
-}
-
-/* Hover effect */
-.table-row-cell:hover {
-    -fx-background-color: #e3f2fd;
+.table-view .column-header .label {
+    -fx-padding: 12;
+    -fx-font-size: 12px;
+    -fx-font-family: 'Inter';
+    -fx-font-style: italic;
 }
 
 /* Table cells */
-.table-cell {
-    -fx-padding: 5 10 5 10;
-    -fx-alignment: CENTER_LEFT;
+.table-view .table-cell {
+    -fx-padding: 16;
+    -fx-border-width: 0 0 1 0;
+    -fx-border-color: rgba(0, 0, 0, 0.25);
+    -fx-font-size: 12px;
+    -fx-font-family: 'Inter';
+}
+
+/* Rows */
+.table-row-cell {
+    -fx-background-color: transparent;
+    -fx-border-width: 0 0 1 0;
+    -fx-border-color: rgba(0, 0, 0, 0.25);
+    -fx-font-family: 'Inter';
+}
+
+/* Selection color */
+.table-view:focused .table-row-cell:filled:focused:selected {
+    -fx-background-color: rgba(0, 0, 0, 0.1);
+    -fx-table-cell-border-color: rgba(0, 0, 0, 0.25);
+    -fx-font-family: 'Inter';
 }
