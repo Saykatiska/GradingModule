@@ -1,12 +1,10 @@
 module com.example.gradingmodule {
     requires javafx.controls;
     requires javafx.fxml;
-    requires org.postgresql.jdbc;
+
     requires com.dlsc.formsfx;
     requires java.sql;
 
-    opens com.example.GradingModule to javafx.fxml;
-    opens com.example.dbconnection;
-    exports com.example.GradingModule;
-    exports com.example.dbconnection;
+    opens com.example.Test to javafx.fxml;
+    exports com.example.Test;
 }
