@@ -13,7 +13,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Line?>
 
-
 <AnchorPane prefHeight="720.0" prefWidth="810.0" stylesheets="@../css/FacultyInput.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.GradingModule.GradingModuleController">
    <children>
       <BorderPane prefHeight="720.0" prefWidth="810.0">
@@ -58,7 +57,7 @@
                         <Label prefHeight="15.0" prefWidth="132.0" />
                         <AnchorPane prefHeight="400.0" prefWidth="750.0">
                            <children>
-                              <TableView prefHeight="460.0" prefWidth="710.0">
+                              <TableView fx:id="subjectsTable" prefHeight="460.0" prefWidth="710.0">
                                 <columns>
                                   <TableColumn fx:id="yearSecCol" maxWidth="141.0" minWidth="141.0" prefWidth="141.0" text="Year &amp; Section" />
                                   <TableColumn fx:id="semCol" maxWidth="110.0" minWidth="110.0" prefWidth="110.0" text="Semester" />

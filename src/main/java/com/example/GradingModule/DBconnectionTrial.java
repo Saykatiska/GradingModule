@@ -4,7 +4,7 @@ import java.sql.*;
 
 public class DBconnectionTrial {
     public static void main(String[] args) {
-        String USER = "postgres.trialP";
+        String USER = "postgres";
         String URL = "jdbc:postgresql://db.autqwzshfjaqbkxpiqxm.supabase.co:5432/postgres";
         String PASSWORD = "pupSISProject2025";
 
