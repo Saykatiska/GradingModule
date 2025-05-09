@@ -23,9 +23,6 @@ public class GradingModuleController implements Initializable {
     private TextField searchBar; // Add this field
 
     @FXML
-    private Label facultyTitle;
-
-    @FXML
     private Label facultyName;
 
     @FXML
@@ -75,7 +72,7 @@ public class GradingModuleController implements Initializable {
 
         // Load data from database (only call once)
         loadSubjectsData();
-        
+
         // Store in original list
         originalSubjectsList.addAll(subjectsList);
 
