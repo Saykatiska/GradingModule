@@ -73,14 +73,10 @@ public class GradingModuleController implements Initializable {
         subjCodeCol.setCellValueFactory(new PropertyValueFactory<>("subjectCode"));
         subjDescCol.setCellValueFactory(new PropertyValueFactory<>("subjectDescription"));
 
-        // Load data from database
+        // Load data from database (only call once)
         loadSubjectsData();
-
-        // Set the items to the TableView
-        subjectsTable.setItems(subjectsList);
-
-        // After loading data, store it in originalSubjectsList
-        loadSubjectsData();
+        
+        // Store in original list
         originalSubjectsList.addAll(subjectsList);
 
         // Setup the search functionality
