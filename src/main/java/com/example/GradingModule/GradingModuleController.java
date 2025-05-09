@@ -19,6 +19,9 @@ public class GradingModuleController implements Initializable {
     private Label facultyName;
 
     @FXML
+    private Label facultyID;
+
+    @FXML
     private TableView<Subject> subjectsTable;
 
     @FXML
@@ -65,17 +68,21 @@ public class GradingModuleController implements Initializable {
     }
 
     private void loadSubjectsData() {
-        try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery("SELECT * FROM subjects")) {
-
-            while (rs.next()) {
-                subjectsList.add(new Subject(
-                    rs.getString("year_section"),
-                    rs.getString("semester"),
-                    rs.getString("subject_code"),
-                    rs.getString("subject_description")
-                ));
+        try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD)) {
+            String query = "SELECT * FROM subjects WHERE faculty_id = ?";
+            try (PreparedStatement pstmt = conn.prepareStatement(query)) {
+                pstmt.setString(1, facultyID.getText());
+            
+                try (ResultSet rs = pstmt.executeQuery()) {
+                    while (rs.next()) {
+                        subjectsList.add(new Subject(
+                            rs.getString("year_section"),
+                            rs.getString("semester"),
+                            rs.getString("subject_code"),
+                            rs.getString("subject_description")
+                        ));
+                    }
+                }
             }
         } catch (SQLException e) {
             System.err.println("Database error: " + e.getMessage());
