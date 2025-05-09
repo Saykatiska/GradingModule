@@ -7,6 +7,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import javafx.stage.StageStyle;
 
 public class FacultyGradingModule extends Application {
     @Override
@@ -20,6 +21,8 @@ public class FacultyGradingModule extends Application {
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Faculty Grading Module");
         stage.setScene(scene);
+        stage.initStyle(StageStyle.TRANSPARENT);
+        scene.setFill(null);
         stage.show();
     }
 

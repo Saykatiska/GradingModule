@@ -9,11 +9,21 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+import java.awt.*;
 import java.net.URL;
 import java.sql.*;
 import java.util.ResourceBundle;
 
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
+import javafx.scene.control.TextField;
+
 public class GradingModuleController implements Initializable {
+    @FXML
+    private TextField searchBar; // Add this field
+
+    @FXML
+    private Label facultyTitle;
 
     @FXML
     private Label facultyName;
@@ -39,7 +49,10 @@ public class GradingModuleController implements Initializable {
     @FXML
     private TableColumn<Subject, String> subjDescCol;
 
-    private ObservableList<Subject> subjectsList = FXCollections.observableArrayList();
+    private final ObservableList<Subject> subjectsList = FXCollections.observableArrayList();
+
+    // Keep a reference to the original data
+    private final ObservableList<Subject> originalSubjectsList = FXCollections.observableArrayList();
 
     // Database connection constants
     private static final String URL = "jdbc:postgresql://db.autqwzshfjaqbkxpiqxm.supabase.co:5432/postgres";
@@ -65,6 +78,13 @@ public class GradingModuleController implements Initializable {
 
         // Set the items to the TableView
         subjectsTable.setItems(subjectsList);
+
+        // After loading data, store it in originalSubjectsList
+        loadSubjectsData();
+        originalSubjectsList.addAll(subjectsList);
+
+        // Setup the search functionality
+        setupSearch();
     }
 
     private void loadSubjectsData() {
@@ -72,7 +92,7 @@ public class GradingModuleController implements Initializable {
             String query = "SELECT * FROM subjects WHERE faculty_id = ?";
             try (PreparedStatement pstmt = conn.prepareStatement(query)) {
                 pstmt.setString(1, facultyID.getText());
-            
+
                 try (ResultSet rs = pstmt.executeQuery()) {
                     while (rs.next()) {
                         subjectsList.add(new Subject(
@@ -90,9 +110,55 @@ public class GradingModuleController implements Initializable {
         }
     }
 
+    private void setupSearch() {
+        // Create a filtered list wrapping the original list
+        FilteredList<Subject> filteredData = new FilteredList<>(subjectsList, p -> true);
+
+        // Add listener to searchBar text property
+        searchBar.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate(subject -> {
+                // If search text is empty, display all subjects
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+
+                // Convert search text to lower case
+                String lowerCaseFilter = newValue.toLowerCase();
+
+                // Match against all fields
+                if (subject.getYearSection().toLowerCase().contains(lowerCaseFilter)) {
+                    return true;
+                }
+                if (subject.getSemester().toLowerCase().contains(lowerCaseFilter)) {
+                    return true;
+                }
+                if (subject.getSubjectCode().toLowerCase().contains(lowerCaseFilter)) {
+                    return true;
+                }
+                if (subject.getSubjectDescription().toLowerCase().contains(lowerCaseFilter)) {
+                    return true;
+                }
+
+                return false; // Does not match
+            });
+        });
+
+        // Wrap the FilteredList in a SortedList
+        SortedList<Subject> sortedData = new SortedList<>(filteredData);
+
+        // Bind the SortedList comparator to the TableView comparator
+        sortedData.comparatorProperty().bind(subjectsTable.comparatorProperty());
+
+        // Add sorted (and filtered) data to the table
+        subjectsTable.setItems(sortedData);
+    }
+
+    // Update your refreshTable method to maintain the search functionality
     @FXML
     public void refreshTable() {
         subjectsList.clear();
+        originalSubjectsList.clear();
         loadSubjectsData();
+        originalSubjectsList.addAll(subjectsList);
     }
 }

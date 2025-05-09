@@ -1,5 +1,8 @@
 .root {
     -fx-font-family: "Inter";
+    -fx-background-radius: 20;
+    -fx-background-color: white; /* or your desired background color */
+    -fx-border-radius: 20;
 }
 
 .label {
@@ -16,7 +19,6 @@
     -fx-font-family: 'Inter';
     -fx-font-size: 12px;
     -fx-background-color: transparent;
-    -fx-table-cell-border-color: rgba(0, 0, 0, 0.25);
     -fx-table-header-border-color: rgba(0, 0, 0, 0.25);
 }
 
@@ -45,17 +47,17 @@
 .table-view .table-cell {
     -fx-padding: 16;
     -fx-border-width: 0 0 1 0;
-    -fx-border-color: rgba(0, 0, 0, 0.25);
     -fx-font-size: 12px;
     -fx-font-family: 'Inter';
+    -fx-alignment: CENTER;
 }
 
 /* Rows */
 .table-row-cell {
     -fx-background-color: transparent;
     -fx-border-width: 0 0 1 0;
-    -fx-border-color: rgba(0, 0, 0, 0.25);
     -fx-font-family: 'Inter';
+    -fx-alignment: CENTER;
 }
 
 /* Selection color */
@@ -63,4 +65,16 @@
     -fx-background-color: rgba(0, 0, 0, 0.1);
     -fx-table-cell-border-color: rgba(0, 0, 0, 0.25);
     -fx-font-family: 'Inter';
+}
+
+.pane-header {
+    -fx-background-color: linear-gradient(to right, #800000 60%, #D97676);
+    -fx-background-radius: 20 20 0 0; /* top-left, top-right, bottom-right, bottom-left */
+    -fx-border-radius: 20 20 0 0;
+}
+
+.pane-footer {
+    -fx-background-color: linear-gradient(to right, #800000 60%, #D97676);
+    -fx-background-radius: 0 0 20 20; /* top-left, top-right, bottom-right, bottom-left */
+    -fx-border-radius: 0 0 20 20;
 }
