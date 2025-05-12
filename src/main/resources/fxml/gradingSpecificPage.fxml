@@ -1,76 +1,86 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" stylesheets="@../css/FacultyInput.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" styleClass="rounded-border-pane" stylesheets="@../css/FacultyInput.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.GradingModule.GradingModuleController">
    <children>
-      <Pane prefHeight="97.0" prefWidth="1280.0" style="-fx-border-radius: 17; -fx-background-color: #800000;">
-         <children>
-            <Circle fill="WHITE" layoutX="84.0" layoutY="49.0" radius="43.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-            <ImageView fitHeight="86.0" fitWidth="86.0" layoutX="41.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../../../../OneDrive/Desktop/PUP.png" />
-               </image>
-            </ImageView>
-            <Text fill="WHITE" layoutX="455.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="FACULTY INPUT GRADES" textAlignment="CENTER">
-               <font>
-                  <Font name="Arial" size="30.0" />
-               </font>
-            </Text>
-         </children>
-         <padding>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-         </padding>
-      </Pane>
-      <Pane layoutY="622.0" prefHeight="97.0" prefWidth="1280.0" style="-fx-background-color: #800000;" />
-      <Label layoutX="95.0" layoutY="120.0" prefHeight="18.0" prefWidth="166.0" text="Austria, Elias A. " textAlignment="CENTER">
-         <font>
-            <Font name="Arial Bold" size="12.0" />
-         </font>
-      </Label>
-      <Line endX="1099.60009765625" layoutX="140.0" layoutY="145.0" startX="-100.0" />
-      <TableView layoutX="240.0" layoutY="183.0" prefHeight="402.0" prefWidth="1004.0">
-        <columns>
-          <TableColumn maxWidth="150.0" minWidth="100.0" prefWidth="150.0" resizable="false" text="Year &amp; Section" />
-          <TableColumn maxWidth="130.0" minWidth="100.0" prefWidth="130.0" resizable="false" text="Semester" />
-            <TableColumn maxWidth="170.0" minWidth="100.0" prefWidth="170.0" resizable="false" text="Student ID" />
-            <TableColumn maxWidth="220.0" minWidth="200.0" prefWidth="220.0" resizable="false" text="Student Name" />
-            <TableColumn maxWidth="170.0" minWidth="100.0" prefWidth="170.0" resizable="false" text="Final Grade" />
-            <TableColumn maxWidth="160.0" minWidth="100.0" prefWidth="160.0" resizable="false" text="Grade Status" />
-        </columns>
-      </TableView>
-      <Text layoutX="58.0" layoutY="180.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Section &amp; Year:" wrappingWidth="113.33673095703125">
-         <font>
-            <Font name="Arial Italic" size="13.0" />
-         </font>
-      </Text>
-      <ChoiceBox layoutX="72.0" layoutY="191.0" prefWidth="150.0" />
-      <Text layoutX="58.0" layoutY="271.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sebject Code:" wrappingWidth="113.33673095703125">
-         <font>
-            <Font name="Arial Italic" size="13.0" />
-         </font>
-      </Text>
-      <ChoiceBox layoutX="72.0" layoutY="283.0" prefWidth="150.0" />
-      <Text layoutX="58.0" layoutY="373.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sebject Description: " wrappingWidth="135.73672485351562">
-         <font>
-            <Font name="Arial Italic" size="13.0" />
-         </font>
-      </Text>
-      <Label alignment="TOP_LEFT" layoutX="72.0" layoutY="383.0" prefHeight="42.0" prefWidth="122.0" />
+      <BorderPane prefHeight="720.0" prefWidth="1280.0" styleClass="rounded-border-pane">
+         <top>
+            <Pane prefHeight="97.0" prefWidth="1280.0" style="-fx-background-color: #800000;" BorderPane.alignment="CENTER">
+               <children>
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="1280.0" spacing="435.0">
+                     <children>
+                        <ImageView fitHeight="51.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/pupsj-logo.png" />
+                           </image>
+                        </ImageView>
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="label" text="FACULTY INPUT GRADES" textAlignment="CENTER">
+                           <font>
+                              <Font name="Arial" size="24.0" />
+                           </font>
+                        </Text>
+                     </children>
+                     <padding>
+                        <Insets bottom="16.0" left="45.0" right="16.0" top="16.0" />
+                     </padding>
+                  </HBox>
+               </children>
+            </Pane>
+         </top>
+         <bottom>
+            <Pane prefHeight="97.0" prefWidth="1280.0" style="-fx-background-color: #800000;" BorderPane.alignment="CENTER" />
+         </bottom>
+         <center>
+            <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Pane prefHeight="72.0" prefWidth="1201.0">
+                     <children>
+                        <VBox prefHeight="48.0" prefWidth="1201.0" spacing="5.0">
+                           <children>
+                              <Label prefHeight="18.0" prefWidth="166.0" text="Austria, Elias A. " textAlignment="CENTER">
+                                 <font>
+                                    <Font name="Arial Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                              <Line endX="1099.60009765625" startX="-100.0" />
+                           </children>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                        </VBox>
+                     </children>
+                  </Pane>
+                  <Pane prefHeight="380.0" prefWidth="1200.0">
+                     <children>
+                        <TableView layoutX="108.0" layoutY="-2.0" prefHeight="380.0" prefWidth="985.0">
+                           <columns>
+                              <TableColumn maxWidth="150.0" minWidth="100.0" prefWidth="150.0" resizable="false" text="Year &amp; Section" />
+                              <TableColumn maxWidth="170.0" minWidth="100.0" prefWidth="170.0" resizable="false" text="Semester" />
+                              <TableColumn maxWidth="160.0" minWidth="100.0" prefWidth="160.0" resizable="false" text="Subject Code" />
+                              <TableColumn maxWidth="450.0" minWidth="300.0" prefWidth="450.0" resizable="false" text="Subject Description" />
+                              <TableColumn maxWidth="60.0" minWidth="40.0" prefWidth="50.0" resizable="false" />
+                           </columns>
+                        </TableView>
+                     </children>
+                  </Pane>
+               </children>
+               <padding>
+                  <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
+               </padding>
+            </VBox>
+         </center>
+      </BorderPane>
    </children>
-   <padding>
-      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-   </padding>
 </AnchorPane>

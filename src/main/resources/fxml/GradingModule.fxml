@@ -66,13 +66,13 @@
                   </Pane>
                   <Pane prefHeight="380.0" prefWidth="1200.0">
                      <children>
-                        <TableView layoutX="108.0" layoutY="-2.0" prefHeight="380.0" prefWidth="985.0">
+                        <TableView fx:id="subjectsTable" layoutX="108.0" layoutY="-2.0" prefHeight="380.0" prefWidth="985.0">
                           <columns>
-                            <TableColumn maxWidth="150.0" minWidth="100.0" prefWidth="150.0" resizable="false" text="Year &amp; Section" />
-                            <TableColumn maxWidth="170.0" minWidth="100.0" prefWidth="170.0" resizable="false" text="Semester" />
-                              <TableColumn maxWidth="160.0" minWidth="100.0" prefWidth="160.0" resizable="false" text="Subject Code" />
-                              <TableColumn maxWidth="450.0" minWidth="300.0" prefWidth="450.0" resizable="false" text="Subject Description" />
-                              <TableColumn maxWidth="60.0" minWidth="40.0" prefWidth="50.0" resizable="false" />
+                            <TableColumn fx:id="yearSecCol" maxWidth="150.0" minWidth="100.0" prefWidth="150.0" resizable="false" text="Year &amp; Section" />
+                            <TableColumn fx:id="semCol" maxWidth="170.0" minWidth="100.0" prefWidth="170.0" resizable="false" text="Semester" />
+                              <TableColumn fx:id="subjCodeCol" maxWidth="160.0" minWidth="100.0" prefWidth="160.0" resizable="false" text="Subject Code" />
+                              <TableColumn fx:id="subjDescCol" maxWidth="450.0" minWidth="300.0" prefWidth="450.0" resizable="false" text="Subject Description" />
+                              <TableColumn fx:id="editBtnCol" maxWidth="60.0" minWidth="40.0" prefWidth="50.0" resizable="false" />
                           </columns>
                         </TableView>
                      </children>

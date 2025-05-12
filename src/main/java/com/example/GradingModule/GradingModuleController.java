@@ -17,6 +17,14 @@ import java.util.ResourceBundle;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TableRow;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import javafx.scene.control.Alert;
+import java.io.IOException;
+
 
 public class GradingModuleController implements Initializable {
     @FXML
@@ -78,7 +86,50 @@ public class GradingModuleController implements Initializable {
 
         // Setup the search functionality
         setupSearch();
+        
+        // Add this line to setup the row click handler
+        setupRowClickHandler();
     }
+
+    private void setupRowClickHandler() {
+        subjectsTable.setRowFactory(tv -> {
+            TableRow<Subject> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (!row.isEmpty() && event.getClickCount() == 2) {
+                    openNewGradingModule();
+                }
+            });
+            return row;
+        });
+    }
+
+    private void openNewGradingModule() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/gradingSpecificPage.fxml"));
+            Parent root = loader.load();
+            
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setTitle("New Grading Module");
+            
+            // Close the current window
+            Stage currentStage = (Stage) subjectsTable.getScene().getWindow();
+            currentStage.close();
+            
+            // Show the new window
+            stage.show();
+            
+        } catch (IOException e) {
+            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("Could not open new grading module: " + e.getMessage());
+            alert.showAndWait();
+        }
+    }
+
+
 
     private void loadSubjectsData() {
         try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD)) {
@@ -89,10 +140,10 @@ public class GradingModuleController implements Initializable {
                 try (ResultSet rs = pstmt.executeQuery()) {
                     while (rs.next()) {
                         subjectsList.add(new Subject(
-                            rs.getString("year_section"),
-                            rs.getString("semester"),
-                            rs.getString("subject_code"),
-                            rs.getString("subject_description")
+                                rs.getString("year_section"),
+                                rs.getString("semester"),
+                                rs.getString("subject_code"),
+                                rs.getString("subject_description")
                         ));
                     }
                 }
