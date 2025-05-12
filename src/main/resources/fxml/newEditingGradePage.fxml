@@ -125,7 +125,7 @@
                                 </Pane>
                                 <AnchorPane prefHeight="750.0" prefWidth="750.0">
                                     <children>
-                                        <TableView fx:id="subjectsTable" prefHeight="750.0" prefWidth="710.0">
+                                        <TableView fx:id="subjectsTable" id="mainGradingTable" prefHeight="750.0" prefWidth="710.0">
                                             <columns>
                                                 <TableColumn fx:id="yearSecCol" editable="false" maxWidth="55.0" minWidth="55.0" prefWidth="55.0" resizable="false" text="#" />
                                                 <TableColumn fx:id="semCol" editable="false" maxWidth="140.0" minWidth="140.0" prefWidth="140.0" resizable="false" text="Student ID" />
