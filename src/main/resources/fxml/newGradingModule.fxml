@@ -97,7 +97,7 @@
                         </Pane>
                         <AnchorPane prefHeight="400.0" prefWidth="750.0">
                            <children>
-                              <TableView fx:id="subjectsTable" prefHeight="460.0" prefWidth="710.0">
+                              <TableView fx:id="subjectsTable" id="mainGradingTable" prefHeight="460.0" prefWidth="710.0">
                                 <columns>
                                   <TableColumn fx:id="yearSecCol" editable="false" maxWidth="141.0" minWidth="141.0" prefWidth="141.0" text="Year &amp; Section" />
                                   <TableColumn fx:id="semCol" editable="false" maxWidth="110.0" minWidth="110.0" prefWidth="110.0" text="Semester" />

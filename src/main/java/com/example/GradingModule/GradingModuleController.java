@@ -8,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
 import java.awt.*;
 import java.net.URL;
@@ -86,7 +87,7 @@ public class GradingModuleController implements Initializable {
 
         // Setup the search functionality
         setupSearch();
-        
+
         // Add this line to setup the row click handler
         setupRowClickHandler();
     }
@@ -96,39 +97,13 @@ public class GradingModuleController implements Initializable {
             TableRow<Subject> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
                 if (!row.isEmpty() && event.getClickCount() == 2) {
-                    openNewGradingModule();
+                    OpenNewGradingModule newModule = new OpenNewGradingModule(subjectsTable);
+                    newModule.open();
                 }
             });
             return row;
         });
     }
-
-    private void openNewGradingModule() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/newEditingGradePage.fxml"));
-            Parent root = loader.load();
-            
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.setTitle("New Grading Module");
-            
-            // Close the current window
-            Stage currentStage = (Stage) subjectsTable.getScene().getWindow();
-            currentStage.close();
-            
-            // Show the new window
-            stage.show();
-            
-        } catch (IOException e) {
-            e.printStackTrace();
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText(null);
-            alert.setContentText("Could not open new grading module: " + e.getMessage());
-            alert.showAndWait();
-        }
-    }
-
     private void loadSubjectsData() {
         try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD)) {
             String query = "SELECT * FROM subjects WHERE faculty_id = ?";
