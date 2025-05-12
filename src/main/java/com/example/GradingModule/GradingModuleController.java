@@ -105,7 +105,7 @@ public class GradingModuleController implements Initializable {
 
     private void openNewGradingModule() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/gradingSpecificPage.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/newEditingGradePage.fxml"));
             Parent root = loader.load();
             
             Stage stage = new Stage();
@@ -128,8 +128,6 @@ public class GradingModuleController implements Initializable {
             alert.showAndWait();
         }
     }
-
-
 
     private void loadSubjectsData() {
         try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD)) {
