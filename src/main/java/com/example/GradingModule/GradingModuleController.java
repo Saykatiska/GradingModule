@@ -8,9 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Stage;
 
-import java.awt.*;
 import java.net.URL;
 import java.sql.*;
 import java.util.ResourceBundle;
@@ -19,12 +17,6 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TableRow;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
-import javafx.scene.control.Alert;
-import java.io.IOException;
 
 
 public class GradingModuleController implements Initializable {

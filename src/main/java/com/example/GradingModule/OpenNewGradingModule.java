@@ -20,6 +20,9 @@ public class OpenNewGradingModule {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/newEditingGradePage.fxml"));
             Parent root = loader.load();
 
+            EditPageController controller = loader.getController();
+            controller.initialize(null, null);
+
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
             stage.setTitle("New Grading Module");
