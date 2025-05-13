@@ -82,6 +82,8 @@ public class GradingModuleController implements Initializable {
 
         // Add this line to setup the row click handler
         setupRowClickHandler();
+
+        subjectsTable.getColumns().forEach(column -> column.setReorderable(false));
     }
 
     private void setupRowClickHandler() {

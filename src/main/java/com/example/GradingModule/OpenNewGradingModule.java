@@ -51,6 +51,8 @@ public class OpenNewGradingModule {
             // Show the new window
             stage.show();
 
+            subjectsTable.getColumns().forEach(column -> column.setReorderable(false));
+
         } catch (IOException e) {
             e.printStackTrace();
             Alert alert = new Alert(Alert.AlertType.ERROR);
