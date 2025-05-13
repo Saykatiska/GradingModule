@@ -1,71 +1,95 @@
 package com.example.GradingModule;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 public class Student {
-    private String student_id;
-    private String last_name;
-    private String first_name;
-    private String program;
-    private String yearSection;
-    
-    // Constructor with all fields
-    public Student(String student_id, String last_name, String first_name, String program, String yearSection) {
-        this.student_id = student_id;
-        this.last_name = last_name;
-        this.first_name = first_name;
-        this.program = program;
-        this.yearSection = yearSection;
+    private final StringProperty studentNo;
+    private final StringProperty studentId;
+    private final StringProperty studentName;
+    private final StringProperty subjCode;
+    private final StringProperty finalGrade;
+    private final StringProperty gradeStatus;
+
+    public Student(String no, String id, String name, String code, String grade, String status) {
+        this.studentNo = new SimpleStringProperty(no);
+        this.studentId = new SimpleStringProperty(id);
+        this.studentName = new SimpleStringProperty(name);
+        this.subjCode = new SimpleStringProperty(code);
+        this.finalGrade = new SimpleStringProperty(grade);
+        this.gradeStatus = new SimpleStringProperty(status);
     }
-    
-    // Getters and Setters
-    public String getStudent_id() {
-        return student_id;
+
+    // Getters and setters for each property
+    public String getStudentNo() {
+        return studentNo.get();
     }
-    
-    public void setStudent_id(String student_id) {
-        this.student_id = student_id;
+
+    public StringProperty studentNoProperty() {
+        return studentNo;
     }
-    
-    public String getLast_name() {
-        return last_name;
+
+    public void setStudentNo(String no) {
+        this.studentNo.set(no);
     }
-    
-    public void setLast_name(String last_name) {
-        this.last_name = last_name;
+
+    public String getStudentId() {
+        return studentId.get();
     }
-    
-    public String getFirst_name() {
-        return first_name;
+
+    public StringProperty studentIdProperty() {
+        return studentId;
     }
-    
-    public void setFirst_name(String first_name) {
-        this.first_name = first_name;
+
+    public void setStudentId(String id) {
+        this.studentId.set(id);
     }
-    
-    public String getProgram() {
-        return program;
+
+    public String getStudentName() {
+        return studentName.get();
     }
-    
-    public void setProgram(String program) {
-        this.program = program;
+
+    public StringProperty studentNameProperty() {
+        return studentName;
     }
-    
-    public String getYearSection() {
-        return yearSection;
+
+    public void setStudentName(String name) {
+        this.studentName.set(name);
     }
-    
-    public void setYearSection(String yearSection) {
-        this.yearSection = yearSection;
+
+    public String getSubjCode() {
+        return subjCode.get();
     }
-    
-    // Optional: Override toString() method for better object representation
-    @Override
-    public String toString() {
-        return "Student{" +
-                "student_id='" + student_id + '\'' +
-                ", last_name='" + last_name + '\'' +
-                ", first_name='" + first_name + '\'' +
-                ", program='" + program + '\'' +
-                ", yearSection='" + yearSection + '\'' +
-                '}';
+
+    public StringProperty subjCodeProperty() {
+        return subjCode;
+    }
+
+    public void setSubjCode(String code) {
+        this.subjCode.set(code);
+    }
+
+    public String getFinalGrade() {
+        return finalGrade.get();
+    }
+
+    public StringProperty finalGradeProperty() {
+        return finalGrade;
+    }
+
+    public void setFinalGrade(String grade) {
+        this.finalGrade.set(grade);
+    }
+
+    public String getGradeStatus() {
+        return gradeStatus.get();
+    }
+
+    public StringProperty gradeStatusProperty() {
+        return gradeStatus;
+    }
+
+    public void setGradeStatus(String status) {
+        this.gradeStatus.set(status);
     }
 }

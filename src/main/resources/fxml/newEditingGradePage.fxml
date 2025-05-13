@@ -18,7 +18,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="1080.0" prefWidth="810.0" styleClass="root" stylesheets="@../css/editGradesPage.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.GradingModule.GradingModuleController">
+<AnchorPane prefHeight="1080.0" prefWidth="810.0" styleClass="root" stylesheets="@../css/editGradesPage.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.GradingModule.EditPageController">
     <children>
         <BorderPane prefHeight="1080.0" prefWidth="810.0">
             <top>
@@ -88,8 +88,6 @@
                                         </ImageView>
                                         <MenuButton fx:id="yrSecCombBox" layoutX="225.0" layoutY="9.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="116.0" text="Year &amp; Section">
                                             <items>
-                                                <MenuItem mnemonicParsing="false" text="Action 1" />
-                                                <MenuItem mnemonicParsing="false" text="Action 2" />
                                             </items>
                                  <effect>
                                     <DropShadow blurType="ONE_PASS_BOX" height="49.1" offsetY="3.0" radius="11.775" width="0.0">
@@ -105,7 +103,7 @@
                                  </font>
                               </Label>
                               <Label fx:id="subjDescLbl" alignment="CENTER" layoutX="516.0" layoutY="18.0" prefHeight="28.0" prefWidth="179.0" text="Object Oriented Programming" textAlignment="CENTER" wrapText="true" />
-                              <MenuButton fx:id="subjCodeCombBox" layoutX="374.0" layoutY="10.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="116.0" text="Subject Code">
+                              <MenuButton fx:id="subjCodeCombBox" layoutX="374.0" layoutY="10.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="116.0" text="COMP001">
                                  <items>
                                     <MenuItem mnemonicParsing="false" text="Action 1" />
                                     <MenuItem mnemonicParsing="false" text="Action 2" />
@@ -125,14 +123,14 @@
                                 </Pane>
                                 <AnchorPane prefHeight="750.0" prefWidth="750.0">
                                     <children>
-                                        <TableView fx:id="subjectsTable" id="mainGradingTable" prefHeight="750.0" prefWidth="710.0">
+                                        <TableView id="mainGradingTable" fx:id="studentsTable" prefHeight="750.0" prefWidth="710.0">
                                             <columns>
-                                                <TableColumn fx:id="yearSecCol" editable="false" maxWidth="55.0" minWidth="55.0" prefWidth="55.0" resizable="false" text="#" />
-                                                <TableColumn fx:id="semCol" editable="false" maxWidth="140.0" minWidth="140.0" prefWidth="140.0" resizable="false" text="Student ID" />
-                                                <TableColumn fx:id="subjCodeCol" editable="false" maxWidth="150.0" minWidth="150.0" prefWidth="150.0" resizable="false" text="Student Name" />
-                                                <TableColumn fx:id="subjDescCol" editable="false" maxWidth="130.0" minWidth="130.0" prefWidth="130.0" text="Subject Code" />
-                                                <TableColumn fx:id="editBtnCol" editable="false" maxWidth="50.0" minWidth="115.0" prefWidth="50.0" resizable="false" text="Final Grade" />
-                                    <TableColumn maxWidth="120.0" minWidth="120.0" prefWidth="120.0" resizable="false" text="Grade Status" />
+                                                <TableColumn fx:id="noStudCol" editable="false" maxWidth="55.0" minWidth="55.0" prefWidth="55.0" resizable="false" text="#" />
+                                                <TableColumn fx:id="studIDCol" editable="false" maxWidth="140.0" minWidth="140.0" prefWidth="140.0" resizable="false" text="Student ID" />
+                                                <TableColumn fx:id="studNameCol" editable="false" maxWidth="150.0" minWidth="150.0" prefWidth="150.0" resizable="false" text="Student Name" />
+                                                <TableColumn fx:id="subjCodeCol" editable="false" maxWidth="130.0" minWidth="130.0" prefWidth="130.0" text="Subject Code" />
+                                                <TableColumn fx:id="finGradeCol" editable="false" maxWidth="50.0" minWidth="115.0" prefWidth="50.0" resizable="false" text="Final Grade" />
+                                    <TableColumn fx:id="gradeStatCol" maxWidth="120.0" minWidth="120.0" prefWidth="120.0" resizable="false" text="Grade Status" />
                                             </columns>
                                         </TableView>
                                     </children>

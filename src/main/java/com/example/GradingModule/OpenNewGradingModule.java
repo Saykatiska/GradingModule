@@ -9,16 +9,36 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class OpenNewGradingModule {
-    private final javafx.scene.control.TableView<Subject> subjectsTable; // Added field for subjectsTable
+    private final javafx.scene.control.TableView<Subject> subjectsTable;
+    private String subjectCode; // Added field for subject code
+    private String subjDesc;
 
-    public OpenNewGradingModule(javafx.scene.control.TableView<Subject> subjectsTable) { // Added constructor
+    public OpenNewGradingModule(javafx.scene.control.TableView<Subject> subjectsTable) {
         this.subjectsTable = subjectsTable;
+    }
+
+    // Add setter method for subject code
+    public void setSubjectCode(String subjectCode) {
+        this.subjectCode = subjectCode;
+    }
+
+    public void setSubjectDesc(String subjectDesc){
+        this.subjDesc = subjectDesc;
     }
 
     public void open() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/newEditingGradePage.fxml"));
             Parent root = loader.load();
+
+            EditPageController controller = loader.getController();
+            controller.initialize(null, null);
+            
+            // Pass the subject code to the controller if it has a setter method
+            if ((subjectCode != null) && (subjDesc != null)) {
+                controller.setSubjectCode(subjectCode);
+                //controller.setSubjectDesc(subjDesc);// Assuming EditPageController has this method
+            }
 
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
