@@ -89,7 +89,10 @@ public class GradingModuleController implements Initializable {
             TableRow<Subject> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
                 if (!row.isEmpty() && event.getClickCount() == 2) {
+                    Subject selectedSubject = row.getItem();
+                    String subjectCode = selectedSubject.getSubjectCode();
                     OpenNewGradingModule newModule = new OpenNewGradingModule(subjectsTable);
+                    newModule.setSubjectCode(subjectCode); // Assuming there's a setSubjectCode method in OpenNewGradingModule
                     newModule.open();
                 }
             });

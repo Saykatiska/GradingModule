@@ -4,22 +4,16 @@ import com.example.dbconnection.dbConnection2;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.MenuButton;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Stage;
-
-import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
 import java.util.ResourceBundle;
 
 public class EditPageController {
+
+    @FXML
+    private Label subjDescLbl;
 
     @FXML
     private MenuButton subjCodeCombBox;
@@ -48,12 +42,14 @@ public class EditPageController {
     @FXML
     private TableColumn<Student, String> gradeStatCol;
 
-    private ObservableList<Student> studentsList = FXCollections.observableArrayList();
+    private final ObservableList<Student> studentsList = FXCollections.observableArrayList();
 
-    dbConnection2 dbConn = new dbConnection2();
-    String url = dbConn.URL;
-    String user = dbConn.USER;
-    String password = dbConn.PASSWORD;
+    private String selectedSubjectCode; // New field to store the subject code
+    private String selectedSubjectDesc;
+
+    String url = dbConnection2.URL;
+    String user = dbConnection2.USER;
+    String password = dbConnection2.PASSWORD;
 
     public void initialize(URL location, ResourceBundle resources) {
         if (studentsTable == null) {
@@ -74,36 +70,72 @@ public class EditPageController {
         
         // Set default text for the MenuButton
         subjCodeCombBox.setText("Select Subject Code");
+
+        // If a subject code was set before initialization, load it now
+        if (selectedSubjectCode != null) {
+            subjCodeCombBox.setText(selectedSubjectCode);
+            loadStudentsBySubjectCode(selectedSubjectCode);
+        }
+
     }
 
     private void loadStudentsBySubjectCode(String subjectCode) {
-        studentsList.clear();
-        studentsTable.getItems().clear();
+        // Create a temporary list to hold the students
+        ObservableList<Student> tempList = FXCollections.observableArrayList();
 
         try (Connection conn = DriverManager.getConnection(url, user, password)) {
-            String query = "SELECT * FROM students_subj WHERE \"subj_Code\" = ?";
-            try (PreparedStatement pstmt = conn.prepareStatement(query)) {
+            // Optimize the query by selecting only needed columns and using an index hint if available
+            String query = """
+            SELECT ss."No.", ss.\"student_ID\", ss.\"student_name\", ss.\"subj_Code\", 
+                   ss.\"finalGrade\", ss.\"gradeStat\"
+            FROM students_subj ss
+            WHERE ss.\"subj_Code\" = ?
+            ORDER BY CAST(ss."No." AS INTEGER)""";
+
+            try (PreparedStatement pstmt = conn.prepareStatement(query,
+                    ResultSet.TYPE_FORWARD_ONLY,
+                    ResultSet.CONCUR_READ_ONLY)) {
+
+                pstmt.setFetchSize(500); // Set an appropriate fetch size
                 pstmt.setString(1, subjectCode);
 
                 try (ResultSet rs = pstmt.executeQuery()) {
+                    // Pre-fetch column indices for better performance
+                    final int noIndex = rs.findColumn("No.");
+                    final int idIndex = rs.findColumn("student_ID");
+                    final int nameIndex = rs.findColumn("student_name");
+                    final int codeIndex = rs.findColumn("subj_Code");
+                    final int gradeIndex = rs.findColumn("finalGrade");
+                    final int statIndex = rs.findColumn("gradeStat");
+
                     while (rs.next()) {
                         Student student = new Student(
-                                rs.getString("No."),
-                                rs.getString("student_ID"),
-                                rs.getString("student_name"),
-                                rs.getString("subj_Code"),
-                                rs.getString("finalGrade"),
-                                rs.getString("gradeStat")
+                                rs.getString(noIndex),
+                                rs.getString(idIndex),
+                                rs.getString(nameIndex),
+                                rs.getString(codeIndex),
+                                rs.getString(gradeIndex),
+                                rs.getString(statIndex)
                         );
-                        studentsList.add(student);
+                        tempList.add(student);
                     }
-                    studentsTable.setItems(studentsList);
                 }
             }
+
+            // Update UI on the JavaFX Application Thread
+            javafx.application.Platform.runLater(() -> {
+                studentsList.clear();
+                studentsList.addAll(tempList);
+                studentsTable.setItems(studentsList);
+            });
+
         } catch (SQLException e) {
             System.err.println("Database error: " + e.getMessage());
             e.printStackTrace();
-            showError("Database Error", "Failed to load student data: " + e.getMessage());
+            // Show error on the JavaFX Application Thread
+            javafx.application.Platform.runLater(() ->
+                    showError("Failed to load student data: " + e.getMessage())
+            );
         }
     }
 
@@ -127,13 +159,31 @@ public class EditPageController {
         } catch (SQLException e) {
             System.err.println("Error loading subject codes: " + e.getMessage());
             e.printStackTrace();
-            showError("Database Error", "Failed to load subject codes: " + e.getMessage());
+            showError("Failed to load subject codes: " + e.getMessage());
         }
     }
 
-    private void showError(String title, String content) {
+    public void setSubjectCode(String subjectCode) {
+        this.selectedSubjectCode = subjectCode;
+        // Update the UI to reflect the selected subject code
+        if (subjCodeCombBox != null) {
+            subjCodeCombBox.setText(subjectCode);
+            // Load the students for this subject code
+            loadStudentsBySubjectCode(subjectCode);
+        }
+    }
+
+    public void setSubjectDesc(String subjectDesc) {
+        this.selectedSubjectDesc = subjectDesc;
+        // Update the UI to reflect the selected subject code
+        if (subjDescLbl != null) {
+            subjDescLbl.setText(subjectDesc);
+        }
+    }
+
+    private void showError(String content) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle(title);
+        alert.setTitle("Database Error");
         alert.setHeaderText(null);
         alert.setContentText(content);
         alert.showAndWait();
